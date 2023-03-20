@@ -1,4 +1,5 @@
 ---
+
 import "../styles/global.css";
 
 const pageTitle = "About me";
@@ -24,6 +25,7 @@ const skillColor = "navy";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
+
     <style define:vars={{ skillColor }}>
       h1 {
         color: purple;
@@ -39,6 +41,7 @@ const skillColor = "navy";
   <body>
     <a href="/">Home</a>
     <a href="/about/">About</a>
+
     <h1>{pageTitle}</h1>
 
     {happy && <p>I am happy to be learning Astro!</p>}
@@ -74,5 +77,6 @@ const skillColor = "navy";
     <ul>
       {skills.map((skill) => <li class="skill">{skill}</li>)}
     </ul>
+
   </body>
 </html>
