@@ -2,6 +2,16 @@
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "jsx": "react-jsx",
-    "jsxImportSource": "preact"
-  }
+    "jsxImportSource": "preact",
+    "importsNotUsedAsValues": "error"
+  },
+  "paths": {
+    "@components/*": ["src/components/*"],
+    "@layouts/*": ["src/layouts/*"]
+  },
+  "plugins": [
+    {
+      "name": "@astrojs/ts-plugin"
+    }
+  ]
 }
