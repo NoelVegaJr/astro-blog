@@ -1,36 +1,27 @@
-import { h } from "preact";
 import { useEffect, useState } from "preact/hooks";
 
 function useTheme() {
   const [theme, setTheme] = useState(
     (() => {
-      if (
-        typeof localStorage !== "undefined" &&
-        localStorage.getItem("theme")
-      ) {
-        return localStorage.getItem("theme") as string;
-      }
+      const savedTheme = window.localStorage.getItem("theme");
 
-      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      if (savedTheme === "dark") {
+        document.body.classList.add("dark");
         return "dark";
       }
+
       return "light";
     })()
   );
 
   useEffect(() => {
-    switch (theme) {
-      case "dark":
-        document.body.classList.remove("dark");
-
-        break;
-      case "light":
-        document.body.classList.add("dark");
-        break;
-    }
-    localStorage.setItem("theme", theme);
-
     window.localStorage.setItem("theme", theme);
+
+    if (theme === "dark") {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
   }, [theme]);
 
   const toggleTheme = () => {
@@ -46,14 +37,14 @@ export default function ThemeButton() {
   return (
     <div class="hover:rotate-12 transition-all duration-200">
       <button onClick={toggleTheme}>
-        {theme === "light" ? (
+        {theme === "dark" ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            class="w-6 h-6 text-white hover:text-orange-500"
+            class="w-6 h-6 text-gray-300 hover:text-orange-500"
           >
             <path
               stroke-linecap="round"
