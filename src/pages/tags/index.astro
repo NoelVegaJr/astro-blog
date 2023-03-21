@@ -1,38 +1,69 @@
 ---
+import HashtagIcon from "../../components/Icons/HashtagIcon.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 const allPosts = await Astro.glob("../posts/*.md");
 const tags = [...new Set(allPosts.map((post) => post.frontmatter.tags).flat())];
+const crumbs = [
+  Astro.url.origin,
+  ...Astro.url.pathname.split("/").filter((s) => s),
+];
 ---
 
 <BaseLayout pageTitle="Tag Index">
-  <div class="tags">
+  <div class="flex gap-2 mb-4">
+    {
+      crumbs.map((crumb, i) => {
+        const url = crumbs.slice(0, i + 1).join("/");
+        const capitalizedCrumb = crumb[0].toUpperCase() + crumb.slice(1);
+        if (i === crumbs.length - 1) {
+          return (
+            <>
+              <div class="text-gray-400">{">"}</div>
+              <span class="text-gray-400">{capitalizedCrumb} </span>
+            </>
+          );
+        }
+
+        if (i === 0) {
+          return (
+            <a href={url} class="text-gray-400 hover:text-white">
+              Home
+            </a>
+          );
+        }
+
+        return (
+          <>
+            <div>{">"}</div>
+            <a href={url} class="text-gray-400 hover:text-white">
+              {capitalizedCrumb}
+            </a>
+          </>
+        );
+      })
+    }
+  </div>
+  <h2 class="font-bold text-3xl mb-2">Tags</h2>
+  <p class="mb-6 italic">All the tags used in posts.</p>
+  <div class="tags flex gap-4 gap-y-8 flex-wrap">
     {
       tags.map((tag) => (
-        <p class="tag">
-          <a href={`/tags/${tag}`}>{tag}</a>
-        </p>
+        <a
+          href={`/tags/${tag}`}
+          class="group flex items-center text-xl gap-2  "
+        >
+          <div
+            class="group-hover:-translate-y-1 transition-all duration-200 flex items-center gap-2 border-b-2 border-dashed dark:border-gray-300 pb-2  dark:text-gray-300 dark:group-hover:text-orange-500 dark:group-hover:border-orange-500
+          group-hover:text-sky-700 group-hover:border-sky-700
+          "
+          >
+            <HashtagIcon styles="h-5 w-5 fill-gray-800 dark:fill-gray-300 dark:group-hover:fill-orange-500 group-hover:fill-sky-700  transition-all duration-200" />
+            <p class="text-gray-600 dark:text-gray-300 group-hover:text-sky-700 dark:group-hover:text-orange-500">
+              {tag}
+            </p>
+          </div>
+        </a>
       ))
     }
   </div>
 </BaseLayout>
-
-<style>
-  a {
-    color: #00539f;
-  }
-
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 auto;
-  }
-
-  .tag {
-    margin: 0.25em;
-    border: dotted 1px #a1a1a1;
-    border-radius: 0.5em;
-    padding: 0.5em 1em;
-    font-size: 1.15em;
-    background-color: #f8fcfd;
-  }
-</style>

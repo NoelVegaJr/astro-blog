@@ -1,9 +1,14 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Greeting from "../components/Greeting.jsx";
+import Greeting from "../components/Greeting.astro";
+import FeaturedSection from "../components/FeaturedSection.astro";
 ---
 
 <BaseLayout pageTitle={"Home Page"}>
-  <h2>My awesome blog subtitle</h2>
-  <Greeting client:load messages={["Hi", "Hello", "Howdy", "Hey there"]} />
+  <div class="">
+    <Greeting />
+  </div>
+  <div class="py-8 border-b border-gray-300 dark:border-orange-500">
+    <FeaturedSection />
+  </div>
 </BaseLayout>

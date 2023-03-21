@@ -1,9 +1,30 @@
 ---
+import ThemeIcon from "./ThemeIcon.jsx";
 ---
 
-<div class="nav-links">
-  <a href="/">Home</a>
-  <a href="/about">About</a>
-  <a href="/blog">Blog</a>
-  <a href="/tags/">Tags</a>
+<div class="flex justify-between items-center">
+  <a href="/" class="font-bold text-3xl">Noel Paper</a>
+  <div class="flex gap-10 items-center text-lg">
+    <a
+      href="/"
+      class="hover:text-sky-700 dark:hover:text-orange-500 transition-all duraiton-200"
+      >Home</a
+    >
+    <a
+      href="/about"
+      class="hover:text-sky-700 dark:hover:text-orange-500 transition-all duraiton-200"
+      >About</a
+    >
+    <a
+      href="/blog"
+      class="hover:text-sky-700 dark:hover:text-orange-500 transition-all duraiton-200"
+      >Blog</a
+    >
+    <a
+      href="/tags/"
+      class="hover:text-sky-700 dark:hover:text-orange-500 transition-all duraiton-200"
+      >Tags</a
+    >
+    <ThemeIcon client:only />
+  </div>
 </div>

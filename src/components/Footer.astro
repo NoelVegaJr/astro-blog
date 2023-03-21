@@ -1,16 +1,19 @@
 ---
-import Social from "./Social.astro";
+import Github from "./SocialIcons/Github.astro";
+import LinkedIn from "./SocialIcons/LinkedIn.astro";
+import Twitter from "./SocialIcons/Twitter.astro";
 ---
 
 <style>
-  footer {
+  /* footer {
     display: flex;
     gap: 1rem;
     margin-top: 2rem;
-  }
+  } */
 </style>
 
-<footer>
-  <Social platform="github" username="noelvegajr" />
-  <Social platform="twitter" username="codeforkdev" />
+<footer class="flex gap-4">
+  <Github />
+  <LinkedIn />
+  <Twitter />
 </footer>

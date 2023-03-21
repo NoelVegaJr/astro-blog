@@ -1,0 +1,34 @@
+---
+import CalendarIcon from "./CalendarIcon.astro";
+
+interface Frontmatter {
+  title: string;
+  description: string;
+  pubDate: string;
+}
+interface Post {
+  url: string;
+  frontmatter: Frontmatter;
+}
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+---
+
+<div>
+  <a
+    href={post.url}
+    class="text-sky-700 dark:text-orange-500 text-lg border-b-2 border-b-transparent hover:border-b-sky-700 dark:hover:border-b-orange-500 cursor-pointer border-dashed inline-block mb-1"
+  >
+    {post.frontmatter.title}
+  </a>
+  <div class="flex items-center gap-4 mb-2">
+    <CalendarIcon />
+    <p class="text-slate-400 text-sm">
+      {post.frontmatter.pubDate.slice(0, 10)}
+    </p>
+  </div>
+  <p>{post.frontmatter.description}</p>
+</div>
